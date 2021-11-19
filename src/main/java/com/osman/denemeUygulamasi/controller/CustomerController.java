@@ -3,8 +3,10 @@ package com.osman.denemeUygulamasi.controller;
 import com.osman.denemeUygulamasi.constant.ApiEndpoints;
 import com.osman.denemeUygulamasi.domain.Customer;
 import com.osman.denemeUygulamasi.model.CustomerDTO;
+import com.osman.denemeUygulamasi.payload.SuccessResponse;
 import com.osman.denemeUygulamasi.service.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,19 +18,19 @@ public class CustomerController {
     CustomerServiceImpl customerServiceImpl;
 
     @RequestMapping(value = ApiEndpoints.GET_CUSTOMER, method = RequestMethod.GET)
-    public Customer getCustomer(@RequestParam(value = "id") Integer id){
+    public ResponseEntity<?> getCustomer(@RequestParam(value = "id") Integer id){
 
-        return customerServiceImpl.getCustomer(id);
+        return ResponseEntity.ok(new SuccessResponse(customerServiceImpl.getCustomer(id)));
     }
 
     @RequestMapping(value = ApiEndpoints.LIST_CUSTOMER, method = RequestMethod.GET)
-    public List<Customer> getCustomer(){
+    public ResponseEntity<?> getCustomer(){
 
-        return customerServiceImpl.listCustomer();
+        return ResponseEntity.ok(new SuccessResponse(customerServiceImpl.listCustomer()));
     }
 
     @RequestMapping(value = ApiEndpoints.CREATE_CUSTOMER, method = RequestMethod.POST)
-    public Customer createCustomer(@RequestBody CustomerDTO dto){
+    public ResponseEntity<?> createCustomer(@RequestBody CustomerDTO dto){
 
         Customer cus = new Customer();
         cus.setCustomerName(dto.getCustomerName());
@@ -36,11 +38,11 @@ public class CustomerController {
         cus.setCountry(dto.getCountry());
         cus.setContactName(dto.getContactName());
 
-        return customerServiceImpl.createCustomer(cus);
+        return ResponseEntity.ok(new SuccessResponse(customerServiceImpl.createCustomer(cus)));
     }
 
     @RequestMapping(value = ApiEndpoints.UPDATE_CUSTOMER, method = RequestMethod.POST)
-    public Customer updateCustomer(@RequestBody CustomerDTO dto){
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO dto){
 
         Customer cus = new Customer();
         cus.setId(dto.getId());
@@ -49,20 +51,21 @@ public class CustomerController {
         cus.setCountry(dto.getCountry());
         cus.setContactName(dto.getContactName());
 
-        return customerServiceImpl.createCustomer(cus);
+        return ResponseEntity.ok(new SuccessResponse(customerServiceImpl.createCustomer(cus)));
     }
 
     @RequestMapping(value = ApiEndpoints.DELETE_CUSTOMER, method = RequestMethod.POST)
-    public void deleteCustomer(@RequestBody CustomerDTO dto){
+    public ResponseEntity<?> deleteCustomer(@RequestBody CustomerDTO dto){
         customerServiceImpl.deleteCustomer(dto.getId());
+        return ResponseEntity.ok(new SuccessResponse(null));
     }
 
     @RequestMapping(value = ApiEndpoints.FIND_BY_CONTACT_NAME, method = RequestMethod.POST)
-    public List<Customer> findByContactName(@RequestBody CustomerDTO dto){
+    public ResponseEntity<?> findByContactName(@RequestBody CustomerDTO dto){
         Customer customer = new Customer();
         customer.setContactName(dto.getContactName());
         customer.setCountry(dto.getCountry());
-        return customerServiceImpl.findByContactName(customer);
+        return ResponseEntity.ok(new SuccessResponse(customerServiceImpl.findByContactName(customer)));
     }
 
 }
