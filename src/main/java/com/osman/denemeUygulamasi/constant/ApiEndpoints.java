@@ -11,4 +11,14 @@ public final class ApiEndpoints {
     public static final String UPDATE_CUSTOMER = BASE_API_URL + "/updateCustomer";
     public static final String DELETE_CUSTOMER = BASE_API_URL + "/deleteCustomer";
     public static final String FIND_BY_CONTACT_NAME = BASE_API_URL + "/findByContactName";
+    public static final String LIST_CITY = BASE_API_URL + "/listCity";
+    public static final String GET_CITY = BASE_API_URL + "/getCity";
+    public static final String CREATE_CITY = BASE_API_URL + "/createCity";
+    public static final String UPDATE_CITY = BASE_API_URL + "/updateCity";
+    public static final String DELETE_CITY = BASE_API_URL + "/deleteCity";
+    public static final String FIND_BY_NAME = BASE_API_URL + "/findByName";
+
+
+
+
 }
